@@ -48,7 +48,7 @@ namespace QuarterlySales.Models.Validation
             }
 
             Employee employee = context.Employees.Find(sale.EmployeeId);
-            return $"Sales for {employee.FullName} for {sale.Year} Q{sale.Quarter} are already in the database."
+            return $"Sales for {employee.FullName} for {sale.Year} Q{sale.Quarter} are already in the database.";
         }
     }
 }
