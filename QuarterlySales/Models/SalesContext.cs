@@ -18,7 +18,7 @@ namespace QuarterlySales.Models
             modelBuilder.Entity<Employee>().HasData(
                 new Employee
                 {
-                    EnployeeId = 1,
+                    EmployeeId = 1,
                     FirstName = "Ada",
                     LastName = "Lovelace",
                     DateOfBirth = new DateTime(1956, 12, 10),
@@ -27,7 +27,7 @@ namespace QuarterlySales.Models
                 },
                 new Employee
                 {
-                    EnployeeId = 2,
+                    EmployeeId = 2,
                     FirstName = "Katherine",
                     LastName = "Johnson",
                     DateOfBirth = new DateTime(1966, 8, 26),
@@ -36,7 +36,7 @@ namespace QuarterlySales.Models
                 },
                 new Employee
                 {
-                    EnployeeId = 3,
+                    EmployeeId = 3,
                     FirstName = "Grace",
                     LastName = "Hopper",
                     DateOfBirth = new DateTime(1975, 12, 9),

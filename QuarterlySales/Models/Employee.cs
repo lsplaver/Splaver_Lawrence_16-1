@@ -8,7 +8,7 @@ namespace QuarterlySales.Models
 {
     public class Employee
     {
-        public int EnployeeId { get; set; }
+        public int EmployeeId { get; set; }
 
         [Required(ErrorMessage = "Please enter a first name.")]
         [Display(Name = "First Name")]
