@@ -35,9 +35,20 @@ namespace QuarterlySales.Models.Validation
             return string.Empty;
         }
 
-        public static string CheckSales(SalesContext context, Sales sales)
+        public static string CheckSales(SalesContext context, Sales sale)
         {
-            throw new NotImplementedException();
+            Sales sales = context.Sales.FirstOrDefault(
+                s => s.EmployeeId == sale.EmployeeId
+                && s.Year == sale.Year
+                && s.Quarter == sale.Quarter);
+
+            if (sales == null)
+            {
+                return string.Empty;
+            }
+
+            Employee employee = context.Employees.Find(sale.EmployeeId);
+            return $"Sales for {employee.FullName} for {sale.Year} Q{sale.Quarter} are already in the database."
         }
     }
 }
