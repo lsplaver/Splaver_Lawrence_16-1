@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using QuarterlySales.Models.Validation;
+using Microsoft.AspNetCore.Mvc;
 
 namespace QuarterlySales.Models
 {
@@ -23,6 +24,7 @@ namespace QuarterlySales.Models
 
         [Required(ErrorMessage = "Please enter a birth date.")]
         [PastDate(ErrorMessage = "Birth date must be a valid date that's in the past."]
+        [Remote("CheckEmployee", "ValidationController", AdditionalFields = "FirstName, LastName")]
         [Display(Name = "Birth Date")]
         public DateTime? DateOfBirth { get; set; }
 
@@ -33,6 +35,7 @@ namespace QuarterlySales.Models
         public DateTime? DateOfHire { get; set; }
 
         [GreaterThan(0, ErrorMessage = "Please select a manager.")]
+        [Remote("CheckManager", "ValidationController", AdditionalFields = "FirstName, LastName, DateOfBirth")]
         [Display(Name = "Manager")]
         public int ManagerId { get; set; }
 

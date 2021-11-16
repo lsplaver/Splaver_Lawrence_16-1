@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using QuarterlySales.Models.Validation;
+using Microsoft.AspNetCore.Mvc;
 
 namespace QuarterlySales.Models
 {
@@ -24,6 +25,7 @@ namespace QuarterlySales.Models
         public double? Amount { get; set; }
 
         [GreaterThan(0, ErrorMessage = "Please select an employee.")]
+        [Remote("CheckSales", "ValidationController", AdditionalFields = "Quarter, Year")]
         [Display(Name = "Employee")]
         public int EmployeeId { get; set; }
 
