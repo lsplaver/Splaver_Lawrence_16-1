@@ -32,7 +32,7 @@ namespace QuarterlySales.Controllers
             SalesListViewModel vm = new SalesListViewModel
             {
                 Sales = query.ToList(),
-                Employees = context.Employee.OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList(),
+                Employees = context.Employees.OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList(),
                 EmployeeId = id
             };
 

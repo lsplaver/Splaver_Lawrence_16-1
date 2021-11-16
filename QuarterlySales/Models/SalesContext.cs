@@ -11,7 +11,7 @@ namespace QuarterlySales.Models
         public SalesContext(DbContextOptions<SalesContext> options) : base(options) { }
 
         public DbSet<Sales> Sales { get; set; }
-        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
