@@ -42,7 +42,7 @@ namespace QuarterlySales.Controllers
                 ManagerId = managerId
             };
 
-            string message = Validate.CheckManagerEmployeeMatch(context, employee)
+            string message = Validate.CheckManagerEmployeeMatch(context, employee);
             if (string.IsNullOrEmpty(message))
             {
                 return Json(true);

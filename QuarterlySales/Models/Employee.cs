@@ -23,13 +23,13 @@ namespace QuarterlySales.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Please enter a birth date.")]
-        [PastDate(ErrorMessage = "Birth date must be a valid date that's in the past."]
+        [PastDate(ErrorMessage = "Birth date must be a valid date that's in the past.")]
         [Remote("CheckEmployee", "ValidationController", AdditionalFields = "FirstName, LastName")]
         [Display(Name = "Birth Date")]
         public DateTime? DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Please enter a hire date.")]
-        [PastDate(ErrorMessage = "Hire date must be a valid date that's in the past."]
+        [PastDate(ErrorMessage = "Hire date must be a valid date that's in the past.")]
         [GreaterThan("1/1/1995", ErrorMessage = "Hire date can't be before company was formed in 1995.")]
         [Display(Name = "Hire Date")]
         public DateTime? DateOfHire { get; set; }
