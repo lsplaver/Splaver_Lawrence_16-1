@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using QuarterlySales.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace QuarterlySales
 {
@@ -24,6 +26,9 @@ namespace QuarterlySales
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<SalesContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("SalesContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
