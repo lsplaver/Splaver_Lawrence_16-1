@@ -25,7 +25,7 @@ namespace QuarterlySales.Models
         public double? Amount { get; set; }
 
         [GreaterThan(0, ErrorMessage = "Please select an employee.")]
-        [Remote("CheckSales", "ValidationController", AdditionalFields = "Quarter, Year")]
+        [Remote("CheckSales", "Validation", AdditionalFields = "Quarter, Year")]
         [Display(Name = "Employee")]
         public int EmployeeId { get; set; }
 
