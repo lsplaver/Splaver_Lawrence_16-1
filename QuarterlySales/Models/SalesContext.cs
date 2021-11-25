@@ -42,6 +42,24 @@ namespace QuarterlySales.Models
                     DateOfBirth = new DateTime(1975, 12, 9),
                     DateOfHire = new DateTime(1999, 1, 1),
                     ManagerId = 1
+                },
+                new Employee
+                {
+                    EmployeeId = 4,
+                    FirstName = "John",
+                    LastName = "Doe",
+                    DateOfBirth = new DateTime(1987, 1, 1),
+                    DateOfHire = new DateTime(1996, 1, 1),
+                    ManagerId = 1
+                },
+                new Employee
+                {
+                    EmployeeId = 5,
+                    FirstName = "John",
+                    LastName = "Smith",
+                    DateOfBirth = new DateTime(2000, 12, 31),
+                    DateOfHire = new DateTime(2020, 1, 1),
+                    ManagerId = 4
                 }
             );
 
@@ -77,6 +95,22 @@ namespace QuarterlySales.Models
                     Year = 2020,
                     Amount = 31009,
                     EmployeeId = 3
+                },
+                new Sales
+                {
+                    SalesId = 5,
+                    Quarter = 1,
+                    Year = 2001,
+                    Amount = 344947,
+                    EmployeeId = 1
+                },
+                new Sales
+                {
+                    SalesId = 6,
+                    Quarter = 1,
+                    Year = 2001,
+                    Amount = 165447,
+                    EmployeeId = 4
                 }
             );
         }
