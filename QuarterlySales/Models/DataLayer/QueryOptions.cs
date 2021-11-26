@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace QuarterlySalesUpdated.Models
+namespace QuarterlySales.Models
 {
     public class QueryOptions<T>
     {

@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using QuarterlySales.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuarterlySalesUpdated.Models
+namespace QuarterlySales.Models
 {
     public class Repository<T> : IRepository<T> where T : class
     {
