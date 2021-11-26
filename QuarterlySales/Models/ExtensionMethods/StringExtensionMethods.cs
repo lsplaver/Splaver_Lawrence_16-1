@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuarterlySalesUpdated.Models
+namespace QuarterlySales.Models
 {
     public static class StringExtensions
     {

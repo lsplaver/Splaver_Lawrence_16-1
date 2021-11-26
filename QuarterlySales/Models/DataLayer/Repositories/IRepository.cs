@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuarterlySalesUpdated.Models
+namespace QuarterlySales.Models
 {
     public interface IRepository<T> where T : class
     {
