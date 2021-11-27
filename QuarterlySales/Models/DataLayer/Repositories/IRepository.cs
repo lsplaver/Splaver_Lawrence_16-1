@@ -11,7 +11,9 @@ namespace QuarterlySales.Models
 
         int Count { get; }
 
-        //T Get(QueryOptions<T> options);
+        T Get(QueryOptions<T> options);
+        T Get(int id);
+        T Get(string id);
 
         void Insert(T entity);
 

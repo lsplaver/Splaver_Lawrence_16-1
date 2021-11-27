@@ -11,17 +11,17 @@ namespace QuarterlySales.Models
         protected const string RouteKey = "currentroute";
 
         protected RouteDictionary routes { get; set; }
-        //protected ISession session { get; set; }
+        protected ISession session { get; set; }
 
-        //public GridBuilder(ISession sess)
-        //{
-        //    session = sess;
-        //    routes = session.GetObject<RouteDictionary>(RouteKey) ?? new RouteDictionary();
-        //}
-
-        public GridBuilder(/*ISession sess,*/ GridDTO values, string defaultSortField)
+        public GridBuilder(ISession sess)
         {
-            //session = sess;
+            session = sess;
+            routes = session.GetObject<RouteDictionary>(RouteKey) ?? new RouteDictionary();
+        }
+
+        public GridBuilder(ISession sess, GridDTO values, string defaultSortField)
+        {
+            session = sess;
 
             routes = new RouteDictionary();
             routes.PageNumber = values.PageNumber;
@@ -29,10 +29,10 @@ namespace QuarterlySales.Models
             routes.SortField = values.SortField ?? defaultSortField;
             routes.SortDirection = values.SortDirection;
 
-            //SaveRouteSegments();
+            SaveRouteSegments();
         }
 
-        //public void SaveRouteSegments() => 
+        public void SaveRouteSegments() => session.SetObject<RouteDictionary>(RouteKey, routes);
 
         public int GetTotalPages(int count)
         {

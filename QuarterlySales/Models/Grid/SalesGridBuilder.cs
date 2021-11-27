@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,21 +8,13 @@ namespace QuarterlySales.Models
 {
     public class SalesGridBuilder : GridBuilder
     {
-        public SalesGridBuilder(SalesGridDTO values, string defaultSortField) : base(values, defaultSortField)
+        public SalesGridBuilder(ISession sess) : base(sess) { }
+        public SalesGridBuilder(ISession sess, SalesGridDTO values, string defaultSortField) : base(sess, values, defaultSortField)
         {
             bool isInitial = values.Employee.IndexOf(RouteDictionary.Employee) == -1;
-            if (isInitial)
-            {
-                routes.EmployeeFilter = RouteDictionary.Employee + values.Employee;
-                routes.QuarterFilter = RouteDictionary.Quarter + values.Quarter;
-                routes.YearFilter = RouteDictionary.Year + values.Year;
-            }
-            else
-            {
-                routes.EmployeeFilter = values.Employee;
-                routes.QuarterFilter = values.Quarter;
-                routes.YearFilter = values.Year;
-            }
+            routes.EmployeeFilter = (isInitial) ? RouteDictionary.Employee + values.Employee : values.Employee;
+            routes.QuarterFilter = (isInitial) ? RouteDictionary.Quarter + values.Quarter : values.Quarter;
+            routes.YearFilter = (isInitial) ? RouteDictionary.Year + values.Year : values.Year;
         }
 
         public void LoadFilterSegments(string[] filter, Employee employee)

@@ -31,5 +31,7 @@ namespace QuarterlySales.Models
             int.TryParse(s, out int id);
             return id;
         }
+
+        public static string Capitalize(this string s) => s?.Substring(0, 1)?.ToUpper() + s?.Substring(1);
     }
 }

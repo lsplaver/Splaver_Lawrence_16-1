@@ -27,7 +27,10 @@ namespace QuarterlySales
         {
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.AddControllersWithViews();
+            services.AddMemoryCache();
+            services.AddSession();
+
+            services.AddControllersWithViews().AddNewtonsoftJson();
 
             services.AddDbContext<SalesContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SalesContext")));
@@ -50,6 +53,8 @@ namespace QuarterlySales
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 

@@ -43,7 +43,7 @@ namespace QuarterlySales.Controllers
         //}
         public ViewResult Index(SalesGridDTO values)
         {
-            var builder = new SalesGridBuilder(values, defaultSortField: nameof(Sales.Employee.FullName));
+            var builder = new SalesGridBuilder(HttpContext.Session, values, defaultSortField: nameof(Sales.Employee.FullName));
 
             var options = new SalesQueryOptions
             {

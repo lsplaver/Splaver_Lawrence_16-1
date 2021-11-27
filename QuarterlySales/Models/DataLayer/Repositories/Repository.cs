@@ -26,6 +26,12 @@ namespace QuarterlySales.Models
         }
 
         public virtual T Get(int id) => dbset.Find(id);
+        public virtual T Get(string id) => dbset.Find(id);
+        public virtual T Get(QueryOptions<T> options)
+        {
+            IQueryable<T> query = BuildQuery(options);
+            return query.FirstOrDefault();
+        }
 
         public virtual void Insert(T entity) => dbset.Add(entity);
         public virtual void Save() => context.SaveChanges();
