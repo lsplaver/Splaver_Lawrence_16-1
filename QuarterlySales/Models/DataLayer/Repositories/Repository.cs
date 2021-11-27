@@ -25,6 +25,8 @@ namespace QuarterlySales.Models
             return query.ToList();
         }
 
+        public virtual T Get(int id) => dbset.Find(id);
+
         public virtual void Insert(T entity) => dbset.Add(entity);
         public virtual void Save() => context.SaveChanges();
 
