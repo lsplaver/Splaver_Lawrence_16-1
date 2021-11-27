@@ -62,9 +62,10 @@ namespace QuarterlySales
             {
                 endpoints.MapControllerRoute(
                     name: "PagingSortingFiltering",
-                    pattern: "{controller}/{action}/page/{pagenumber}/size/{pagesize}/sort/{sortfield}/{sortdirection}/filterby/employee-{employee}/year-{year}/qtr-{quarter}");
+                    //pattern: "{controller}/{action}/page/{pagenumber}/size/{pagesize}/sort/{sortfield}/{sortdirection}/filterby/employee-{employee}/year-{year}/qtr-{quarter}");
+                    pattern: "{controller}/{action}/page/{pagenumber}/size/{pagesize}/sort/{sortfield}/{sortdirection}/filterby/{employee}/{year}/{quarter}");
 
-                endpoints.MapControllerRoute(
+            endpoints.MapControllerRoute(
                     name: "PagingSorting",
                     pattern: "{controller}/{action}/page/{pagenumber}/size/{pagesize}/sort/{sortfield}/{sortdirection}");
 

@@ -37,7 +37,7 @@ namespace QuarterlySales.Models
         public int GetTotalPages(int count)
         {
             int size = routes.PageSize;
-            return ((count + size) - 1) / size;
+            return (count + size - 1) / size;
         }
 
         public RouteDictionary CurrentRoute => routes;

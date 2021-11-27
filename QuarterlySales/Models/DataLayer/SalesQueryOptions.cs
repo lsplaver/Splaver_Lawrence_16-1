@@ -38,7 +38,7 @@ namespace QuarterlySales.Models
             }
             else
             {
-                OrderBy = s => s.Employee.FullName;
+                OrderBy = s => s.Employee.LastName;
             }
         }
     }

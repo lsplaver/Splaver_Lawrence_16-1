@@ -43,7 +43,7 @@ namespace QuarterlySales.Controllers
         //}
         public ViewResult Index(SalesGridDTO values)
         {
-            var builder = new SalesGridBuilder(HttpContext.Session, values, defaultSortField: nameof(Sales.Employee.FullName));
+            var builder = new SalesGridBuilder(HttpContext.Session, values, defaultSortField: nameof(Sales.Employee.LastName));
 
             var options = new SalesQueryOptions
             {
@@ -60,7 +60,7 @@ namespace QuarterlySales.Controllers
                 Sales = data.Sales.List(options),
                 Employees = data.Employees.List(new QueryOptions<Employee>
                 {
-                    OrderBy = e => e.FullName
+                    OrderBy = e => e.LastName
                 }),
                 CurrentRoute = builder.CurrentRoute,
                 TotalPages = builder.GetTotalPages(data.Sales.Count)
