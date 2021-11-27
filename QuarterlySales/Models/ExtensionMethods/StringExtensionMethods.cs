@@ -25,5 +25,11 @@ namespace QuarterlySales.Models
 
         public static bool EqualsNoCase(this string s, string toCompare) =>
             s?.ToLower() == toCompare?.ToLower();
+
+        public static int ToInt(this string s)
+        {
+            int.TryParse(s, out int id);
+            return id;
+        }
     }
 }
