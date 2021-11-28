@@ -35,7 +35,7 @@ namespace QuarterlySales.Models
             set => this[nameof(GridDTO.SortDirection)] = value;
         }
 
-        public void SetSortAndDirction(string fieldName, RouteDictionary current)
+        public void SetSortAndDirection(string fieldName, RouteDictionary current)
         {
             this[nameof(GridDTO.SortField)] = fieldName;
 
