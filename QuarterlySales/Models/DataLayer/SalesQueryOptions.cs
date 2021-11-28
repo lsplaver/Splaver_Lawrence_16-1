@@ -24,7 +24,7 @@ namespace QuarterlySales.Models
                 int id = builder.CurrentRoute.EmployeeFilter.ToInt();
                 if (id > 0)
                 {
-                    Where = s => s.Employee.EmployeeId == s.EmployeeId;
+                    Where = s => s.Employee.EmployeeId == id;
                 }
             }
 

@@ -30,7 +30,5 @@ namespace QuarterlySales.Models
         public int EmployeeId { get; set; }
 
         public Employee Employee { get; set; }
-
-        //public IEnumerable<Employee> Employees { get; set; }
     }
 }

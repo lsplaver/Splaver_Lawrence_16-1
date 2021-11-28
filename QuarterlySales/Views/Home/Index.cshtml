@@ -20,14 +20,14 @@
     <label class="col-sm-2 col-form-label">Quarter</label>
 
     <select name="filter" class="form-control m-2"
-        asp-items="@(new SelectList(Model.Sales, "Quarter", "Quarter", current.QuarterFilter))">
+        asp-items="@(new SelectList(Model.SalesListQuarter, "", "", current.QuarterFilter))">
         <option value="@SalesGridDTO.DefaultFilter">All</option>
     </select>
 
     <label class="col-sm-2 col-form-label">Year</label>
 
     <select name="filter" class="form-control m-2"
-        asp-items="@(new SelectList(Model.Sales, "Year", "Year", current.YearFilter))">
+        asp-items="@(new SelectList(Model.SalesListYear, "Year", "Year", current.YearFilter))">
         <option value="@SalesGridDTO.DefaultFilter">All</option>
     </select>
 
