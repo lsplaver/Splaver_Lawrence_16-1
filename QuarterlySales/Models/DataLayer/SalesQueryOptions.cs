@@ -32,9 +32,13 @@ namespace QuarterlySales.Models
             {
                 OrderBy = s => s.Quarter;
             }
-            else if (builder.IsFilterByYear)
+            else if (builder.IsSortByYear)
             {
                 OrderBy = s => s.Year;
+            }
+            else if (builder.IsSortByAmount)
+            {
+                OrderBy = s => s.Amount;
             }
             else
             {

@@ -40,6 +40,7 @@ namespace QuarterlySales.Models
         public bool IsFilterByYear => routes.YearFilter != def;
 
         public bool IsSortByQuarter => routes.SortField.EqualsNoCase(nameof(Sales.Quarter));
-        public bool ISSortByYear => routes.SortField.EqualsNoCase(nameof(Sales.Year));
+        public bool IsSortByYear => routes.SortField.EqualsNoCase(nameof(Sales.Year));
+        public bool IsSortByAmount => routes.SortField.EqualsNoCase(nameof(Sales.Amount));
     }
 }
