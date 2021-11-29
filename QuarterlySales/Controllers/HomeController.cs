@@ -10,46 +10,61 @@ namespace QuarterlySales.Controllers
 {
     public class HomeController : Controller
     {
-        public SalesContext context { get; set; }
-
-        public HomeController(SalesContext ctx) => context = ctx;
+        private QuarterlySalesUnitOfWork data { get; set; }
+        public HomeController(SalesContext ctx) => data = new QuarterlySalesUnitOfWork(ctx);
 
         [HttpGet]
-        public ViewResult Index(int id)
+        public ViewResult Index(SalesGridDTO values)
         {
-            IQueryable<Sales> query = context.Sales
-                .Include(s => s.Employee)
-                .OrderBy(s => s.Employee.LastName)
-                .ThenBy(s => s.Employee.FirstName)
-                .ThenBy(s => s.Year)
-                .ThenBy(s => s.Quarter);
+            var builder = new SalesGridBuilder(HttpContext.Session, values, defaultSortField: nameof(Sales.Employee.LastName));
 
-            if (id > 0)
+            var options = new SalesQueryOptions
             {
-                query = query.Where(s => s.EmployeeId == id);
-            }
+                Includes = "Employee",
+                OrderByDirection = builder.CurrentRoute.SortDirection,
+                PageNumber = builder.CurrentRoute.PageNumber,
+                PageSize = builder.CurrentRoute.PageSize
+            };
 
-            SalesListViewModel vm = new SalesListViewModel
+            options.SortFilter(builder);
+
+            var vm = new SalesListViewModel
             {
-                Sales = query.ToList(),
-                Employees = context.Employees.OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList(),
-                EmployeeId = id
+                Sales = data.Sales.List(options),
+                Employees = data.Employees.List(new QueryOptions<Employee>
+                {
+                    OrderBy = e => e.LastName
+                }),
+                CurrentRoute = builder.CurrentRoute,
+                TotalPages = builder.GetTotalPages(data.Sales.Count),
+                SalesListQuarter = new int[4] { 1, 2, 3, 4 },
+                SalesListYear = data.Sales.List(new QueryOptions<Sales>
+                {
+                    Where = s => s.Year >= 2000
+                }).Distinct().ToList(),
             };
 
             return View(vm);
         }
 
         [HttpPost]
-        public RedirectToActionResult Index(Employee employee)
+        public RedirectToActionResult Filter(string[] filter, bool clear = false)
         {
-            if (employee.EmployeeId > 0)
+            var builder = new SalesGridBuilder(HttpContext.Session);
+
+            if (clear)
             {
-                return RedirectToAction("Index", new { id = employee.EmployeeId });
+                builder.ClearFilterSegments();
             }
             else
             {
-                return RedirectToAction("Index", new { id = string.Empty });
+                var employee = data.Employees.Get(filter[0].ToInt());
+                builder.CurrentRoute.PageNumber = 1;
+                builder.LoadFilterSegments(filter, employee);
             }
+
+            builder.SaveRouteSegments();
+            return RedirectToAction("Index", builder.CurrentRoute);
         }
     }
 }

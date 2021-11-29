@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuarterlySalesUpdated.Models
+namespace QuarterlySales.Models
 {
     public static class StringExtensions
     {
@@ -25,5 +25,13 @@ namespace QuarterlySalesUpdated.Models
 
         public static bool EqualsNoCase(this string s, string toCompare) =>
             s?.ToLower() == toCompare?.ToLower();
+
+        public static int ToInt(this string s)
+        {
+            int.TryParse(s, out int id);
+            return id;
+        }
+
+        public static string Capitalize(this string s) => s?.Substring(0, 1)?.ToUpper() + s?.Substring(1);
     }
 }

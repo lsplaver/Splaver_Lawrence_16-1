@@ -2,51 +2,84 @@
 
 @{ 
     ViewBag.Title = "Quarterly Sales";
+
+    RouteDictionary current = Model.CurrentRoute;
+    RouteDictionary routes = Model.CurrentRoute.Clone();
 }
 
 <h4 class="mt-2 mb-2">@ViewBag.Title</h4>
 
-<form asp-action="Index" method="post">
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Employee</label>
-        
-        <div class="col-sm-4">
-            <select name="EmployeeId" class="form-control"
-                    asp-items="@(new SelectList(Model.Employees, "EmployeeId", "FullName", Model.EmployeeId))">
-                <option value="0">All</option>
-            </select>
-        </div>
+<form asp-action="Filter" method="post" class="form-inline">
+    <label class="col-sm-2 col-form-label">Employee</label>
+    
+    <select name="filter" class="form-control m-2"
+        asp-items="@(new SelectList(Model.Employees, "EmployeeId", "FullName", current.EmployeeFilter))">
+        <option value="@SalesGridDTO.DefaultFilter">All</option>
+    </select>
 
-        <div class="col">
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </div>
-    </div>
+    <label class="col-sm-2 col-form-label">Quarter</label>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Year</th>
-                <th>Quarter</th>
-                <th>Employee</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(Sales sales in Model.Sales)
-            {
-                <tr>
-                    <td>@sales.Year</td>
-                    <td>@sales.Quarter</td>
-                    <td>@sales.Employee.FullName</td>
-                    <td>@sales.Amount?.ToString("C")</td>
-                </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3">Total Sales</td>
-                <td>@Model.Sales.Sum(s => s.Amount)?.ToString("C")</td>
-            </tr>
-        </tfoot>
-    </table>
+    <select name="filter" class="form-control m-2"
+        asp-items="@(new SelectList(Model.SalesListQuarter, "", "", current.QuarterFilter))">
+        <option value="@SalesGridDTO.DefaultFilter">All</option>
+    </select>
+
+    <label class="col-sm-2 col-form-label">Year</label>
+
+    <select name="filter" class="form-control m-2"
+        asp-items="@(new SelectList(Model.SalesListYear, "Year", "Year", current.YearFilter))">
+        <option value="@SalesGridDTO.DefaultFilter">All</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary mr-2">Filter</button>
+    <button type="submit" class="btn btn-primary" name="clear" value="true">Clear</button>
 </form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @{ routes.SetSortAndDirection(nameof(Sales.Year), current); }
+                    <a asp-action="Index" asp-all-route-data="@routes">Year</a>
+            </th>
+            <th>
+                @{ routes.SetSortAndDirection(nameof(Sales.Quarter), current); }
+                    <a asp-action="Index" asp-all-route-data="@routes">Quarter</a>
+            </th>
+            <th>
+                @{ routes.SetSortAndDirection(nameof(Sales.Employee.FullName), current); }
+                    <a asp-action="Index" asp-all-route-data="@routes">Employee</a>
+            </th>
+            <th>
+                @{ routes.SetSortAndDirection(nameof(Sales.Amount), current); }
+                    <a asp-action="Index" asp-all-route-data="@routes">Amount</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Sales sales in Model.Sales)
+        {
+            <tr>
+                <td>@sales.Year</td>
+                <td>@sales.Quarter</td>
+                <td>@sales.Employee.FullName</td>
+                <td>@sales.Amount?.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">Total Sales</td>
+            <td>@Model.Sales.Sum(s => s.Amount)?.ToString("C")</td>
+        </tr>
+    </tfoot>
+</table>
+
+@{ 
+    routes = Model.CurrentRoute.Clone();
+    for (int x = 1; x <= Model.TotalPages; x++)
+    {
+        routes.PageNumber = x;
+        <a asp-action="Index" asp-all-route-data="@routes" class="btn btn-primary @Nav.Active(x, current.PageNumber)">@x</a>
+    }
+}

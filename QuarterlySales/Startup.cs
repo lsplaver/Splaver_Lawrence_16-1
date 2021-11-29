@@ -27,7 +27,10 @@ namespace QuarterlySales
         {
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.AddControllersWithViews();
+            services.AddMemoryCache();
+            services.AddSession();
+
+            services.AddControllersWithViews().AddNewtonsoftJson();
 
             services.AddDbContext<SalesContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SalesContext")));
@@ -51,17 +54,20 @@ namespace QuarterlySales
 
             app.UseRouting();
 
+            app.UseSession();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "PagingSortingFiltering",
-                    pattern: "{controller}/{action}/page/{pagenumber}/size/{pagesize}/sort/{sortfield}/{sortdirection}/filterby/employee-{employee}/year-{year}/qtr-{quarter}");
+                    //pattern: "{controller}/{action}/page/{pagenumber}/size/{pagesize}/sort/{sortfield}/{sortdirection}/filterby/employee-{employee}/year-{year}/qtr-{quarter}");
+                    pattern: "{controller}/{action}/page/{pagenumber}/size/{pagesize}/sort/{sortfield}/{sortdirection}/filterby/{employee}/{year}/{quarter}");
 
-                endpoints.MapControllerRoute(
-                    name: "PagingSorting",
-                    pattern: "{controller}/{action}/page/{pagenumber}/size/{pagesize}/sort/{sortfield}/{sortdirection}");
+            //endpoints.MapControllerRoute(
+            //        name: "PagingSorting",
+            //        pattern: "{controller}/{action}/page/{pagenumber}/size/{pagesize}/sort/{sortfield}/{sortdirection}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
