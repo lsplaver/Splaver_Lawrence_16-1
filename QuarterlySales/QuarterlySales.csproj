@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20211128170012_AddICollectionEmployeesToSalesModel.Designer.cs" />
     <Compile Remove="Migrations\20211215171934_AddedRemoteValidationToSales.cs" />
     <Compile Remove="Migrations\20211215171934_AddedRemoteValidationToSales.Designer.cs" />
+    <Compile Remove="Migrations\20211215191522_AddedIValidationToSalesQuarterAndYear.cs" />
+    <Compile Remove="Migrations\20211215191522_AddedIValidationToSalesQuarterAndYear.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

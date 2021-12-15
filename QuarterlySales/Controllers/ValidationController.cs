@@ -68,39 +68,5 @@ namespace QuarterlySales.Controllers
 
             return Json(message);
         }
-
-        public JsonResult CheckSalesYear(int year, int employeeId)
-        {
-            Sales sales = new Sales
-            {
-                EmployeeId = employeeId,
-                Year = year
-            };
-
-            string message = Validate.CheckSalesYear(data.Employees, sales);
-            if (string.IsNullOrEmpty(message))
-            {
-                return Json(true);
-            }
-
-            return Json(message);
-        }
-
-        public JsonResult CheckSalesQuarter(int quarter, int employeeId)
-        {
-            Sales sales = new Sales
-            {
-                EmployeeId = employeeId,
-                Quarter = quarter
-            };
-
-            string message = Validate.CheckSalesQuarter(data.Employees, sales);
-            if (string.IsNullOrEmpty(message))
-            {
-                return Json(true);
-            }
-
-            return Json(message);
-        }
     }
 }
