@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuarterlySales.Models
 {
-    public static class SessionExtension
+    public static class SessionExtensionMethods
     {
         public static void SetObject<T>(this ISession session, string key, T value) => session.SetString(key, JsonConvert.SerializeObject(value));
 

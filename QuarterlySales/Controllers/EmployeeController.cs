@@ -10,29 +10,31 @@ namespace QuarterlySales.Controllers
 {
     public class EmployeeController : Controller
     {
-        private SalesContext context { get; set; }
+        // private SalesContext context { get; set; }
 
-        public EmployeeController(SalesContext ctx) => context = ctx;
+        private Repository<Employee> data { get; set; }
+        public EmployeeController(SalesContext ctx) => data = new Repository<Employee>(ctx);
 
         public IActionResult Index() => RedirectToAction("Index", "Home");
 
         [HttpGet]
         public ViewResult Add()
         {
-            ViewBag.Employees = context.Employees.OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList();
+            // ViewBag.Employees = context.Employees.OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList();
+            ViewBag.Employees = data.List(new QueryOptions<Employee> { OrderBy = e => e.FirstName });
             return View();
         }
 
         [HttpPost]
         public IActionResult Add(Employee employee)
         {
-            string message = Validate.CheckEmployee(context, employee);
+            string message = Validate.CheckEmployee(/*context*/ data, employee);
             if (!string.IsNullOrEmpty(message))
             {
                 ModelState.AddModelError(nameof(Employee.DateOfBirth), message);
             }
 
-            message = Validate.CheckManagerEmployeeMatch(context, employee);
+            message = Validate.CheckManagerEmployeeMatch(/*context*/ data, employee);
             if (!string.IsNullOrEmpty(message))
             {
                 ModelState.AddModelError(nameof(Employee.ManagerId), message);
@@ -40,14 +42,17 @@ namespace QuarterlySales.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Employees.Add(employee);
-                context.SaveChanges();
+                // context.Employees.Add(employee);
+                data.Insert(employee);
+                // context.SaveChanges();
+                data.Save();
                 TempData["message"] = $"Employee {employee.FullName} added";
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewBag.Employees = context.Employees.OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList();
+                //ViewBag.Employees = context.Employees.OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList();
+                ViewBag.Employees = data.List(new QueryOptions<Employee> { OrderBy = e => e.FirstName });
                 return View();
             }
         }

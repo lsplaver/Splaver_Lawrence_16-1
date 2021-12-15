@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuarterlySales.Models
 {
-    public static class StringExtensions
+    public static class StringExtensionsMethods
     {
         public static string Slug(this string s)
         {
