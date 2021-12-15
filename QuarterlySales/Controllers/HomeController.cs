@@ -37,11 +37,7 @@ namespace QuarterlySales.Controllers
                 }),
                 CurrentRoute = builder.CurrentRoute,
                 TotalPages = builder.GetTotalPages(data.Sales.Count),
-                SalesListQuarter = new int[4] { 1, 2, 3, 4 },
-                SalesListYear = data.Sales.List(new QueryOptions<Sales>
-                {
-                    Where = s => s.Year >= 2000
-                }).Distinct().ToList(),
+                SalesListQuarter = new int[4] { 1, 2, 3, 4 }
             };
 
             return View(vm);
