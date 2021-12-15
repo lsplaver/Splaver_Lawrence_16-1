@@ -57,5 +57,47 @@ namespace QuarterlySales.Models.Validation
             Employee employee = data.Employees.Get(sale.EmployeeId);
             return $"Sales for {employee.FullName} for {sale.Year} Q{sale.Quarter} are already in the database.";
         }
+
+        public static string CheckSalesYear(Repository<Employee> data, Sales sale)
+        {
+            Employee employee = data.Get(sale.EmployeeId);
+            int hireYear = employee.DateOfHire.Value.Year;
+
+            if (sale.Year >= hireYear)
+            {
+                return string.Empty;
+            }
+
+                return $"Sales for {employee.FullName} for {sale.Year} year that the employee was hired.";
+        }
+        public static string CheckSalesQuarter(Repository<Employee> data, Sales sale)
+        {
+            Employee employee = data.Get(sale.EmployeeId);
+            int hireMonth = employee.DateOfHire.Value.Month;
+            int hireQuarter = 0;
+            if (hireMonth == 1 || hireMonth == 2 || hireMonth == 3)
+            {
+                hireQuarter = 1;
+            }
+            else if (hireMonth == 4 || hireMonth == 5 || hireMonth == 6)
+            {
+                hireQuarter = 2;
+            }
+            else if (hireMonth == 7 || hireMonth == 8 || hireMonth == 9)
+            {
+                hireQuarter = 3;
+            }
+            else
+            {
+                hireQuarter = 4;
+            }
+
+            if (sale.Quarter >= hireQuarter)
+            {
+                return string.Empty;
+            }
+
+            return $"Sales for {employee.FullName} for  Q{sale.Quarter} is before the quarter of the year that the employee was hired.";
+        }
     }
 }

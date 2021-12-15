@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20211127234025_EnumerableEmployeesInSales.Designer.cs" />
     <Compile Remove="Migrations\20211128170012_AddICollectionEmployeesToSalesModel.cs" />
     <Compile Remove="Migrations\20211128170012_AddICollectionEmployeesToSalesModel.Designer.cs" />
+    <Compile Remove="Migrations\20211215171934_AddedRemoteValidationToSales.cs" />
+    <Compile Remove="Migrations\20211215171934_AddedRemoteValidationToSales.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

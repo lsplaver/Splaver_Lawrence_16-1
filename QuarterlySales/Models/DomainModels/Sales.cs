@@ -14,10 +14,12 @@ namespace QuarterlySales.Models
 
         [Required(ErrorMessage = "Please enter a quarter.")]
         [Range(1, 4, ErrorMessage = "Quarter must be between 1 and 4.")]
+        [Remote("CheckSalesQuarter", "Validation", AdditionalFields = "EmployeeId")]
         public int? Quarter { get; set; }
 
         [Required(ErrorMessage = "Please enter a year.")]
         [GreaterThan(2000, ErrorMessage = "Year may not be before 2000.")]
+        [Remote("CheckSalesYear", "Validation", AdditionalFields = "EmployeeId")]
         public int? Year { get; set; }
 
         [Required(ErrorMessage = "Please enter an amount.")]
