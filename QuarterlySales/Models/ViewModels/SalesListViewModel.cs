@@ -13,7 +13,6 @@ namespace QuarterlySales.Models
 
         public IEnumerable<Employee> Employees { get; set; }
 
-        public List<Sales> Years { get; set; }
         public IEnumerable<int> SalesListYear
         {
             get
