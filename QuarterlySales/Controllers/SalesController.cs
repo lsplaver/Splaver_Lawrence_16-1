@@ -10,10 +10,7 @@ namespace QuarterlySales.Controllers
 {
     public class SalesController : Controller
     {
-        // private SalesContext context { get; set; }
-
         private QuarterlySalesUnitOfWork data { get; set; }
-        // public SalesController(SalesContext ctx) => context = ctx;
         public SalesController(SalesContext ctx) => data = new QuarterlySalesUnitOfWork(ctx);
 
         public IActionResult Index() => RedirectToAction("Index", "Home");
@@ -21,7 +18,6 @@ namespace QuarterlySales.Controllers
         [HttpGet]
         public ViewResult Add()
         {
-            // ViewBag.Employees = context.Employees.OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList();
             ViewBag.Employees = data.Employees.List(new QueryOptions<Employee> { OrderBy = e => e.FirstName });
             return View();
         }
@@ -29,7 +25,7 @@ namespace QuarterlySales.Controllers
         [HttpPost]
         public IActionResult Add(Sales sales)
         {
-            string message = Validate.CheckSales(/*context*/ data, sales);
+            string message = Validate.CheckSales(data, sales);
             if (!string.IsNullOrEmpty(message))
             {
                 ModelState.AddModelError(nameof(sales.EmployeeId), message);
@@ -37,16 +33,13 @@ namespace QuarterlySales.Controllers
 
             if (ModelState.IsValid)
             {
-                // context.Sales.Add(sales);
                 data.Sales.Insert(sales);
-                // context.SaveChanges();
                 data.Save();
                 TempData["message"] = $"Sales added";
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                // ViewBag.Employees = context.Employees.OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList();
                 ViewBag.Employees = data.Employees.List(new QueryOptions<Employee> { OrderBy = e => e.FirstName });
                 return View();
             }

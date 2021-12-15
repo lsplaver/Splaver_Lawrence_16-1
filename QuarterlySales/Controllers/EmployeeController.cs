@@ -10,8 +10,6 @@ namespace QuarterlySales.Controllers
 {
     public class EmployeeController : Controller
     {
-        // private SalesContext context { get; set; }
-
         private Repository<Employee> data { get; set; }
         public EmployeeController(SalesContext ctx) => data = new Repository<Employee>(ctx);
 
@@ -20,7 +18,6 @@ namespace QuarterlySales.Controllers
         [HttpGet]
         public ViewResult Add()
         {
-            // ViewBag.Employees = context.Employees.OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList();
             ViewBag.Employees = data.List(new QueryOptions<Employee> { OrderBy = e => e.FirstName });
             return View();
         }
@@ -28,13 +25,13 @@ namespace QuarterlySales.Controllers
         [HttpPost]
         public IActionResult Add(Employee employee)
         {
-            string message = Validate.CheckEmployee(/*context*/ data, employee);
+            string message = Validate.CheckEmployee(data, employee);
             if (!string.IsNullOrEmpty(message))
             {
                 ModelState.AddModelError(nameof(Employee.DateOfBirth), message);
             }
 
-            message = Validate.CheckManagerEmployeeMatch(/*context*/ data, employee);
+            message = Validate.CheckManagerEmployeeMatch(data, employee);
             if (!string.IsNullOrEmpty(message))
             {
                 ModelState.AddModelError(nameof(Employee.ManagerId), message);
@@ -42,16 +39,13 @@ namespace QuarterlySales.Controllers
 
             if (ModelState.IsValid)
             {
-                // context.Employees.Add(employee);
                 data.Insert(employee);
-                // context.SaveChanges();
                 data.Save();
                 TempData["message"] = $"Employee {employee.FullName} added";
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                //ViewBag.Employees = context.Employees.OrderBy(e => e.LastName).ThenBy(e => e.FirstName).ToList();
                 ViewBag.Employees = data.List(new QueryOptions<Employee> { OrderBy = e => e.FirstName });
                 return View();
             }
