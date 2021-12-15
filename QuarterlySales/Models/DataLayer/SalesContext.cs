@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace QuarterlySales.Models
 {
-    public class SalesContext : DbContext
+    public class SalesContext : IdentityDbContext<User>
     {
         public SalesContext(DbContextOptions<SalesContext> options) : base(options) { }
 
@@ -15,6 +17,9 @@ namespace QuarterlySales.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+
             modelBuilder.Entity<Employee>().HasData(
                 new Employee
                 {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuarterlySales.Models;
 using QuarterlySales.Models.Validation;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace QuarterlySales.Controllers
 {
+    [Authorize]
     public class SalesController : Controller
     {
         private QuarterlySalesUnitOfWork data { get; set; }
