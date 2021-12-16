@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using QuarterlySales.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace QuarterlySales
 {
@@ -34,6 +35,14 @@ namespace QuarterlySales
 
             services.AddDbContext<SalesContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SalesContext")));
+
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<SalesContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +65,7 @@ namespace QuarterlySales
 
             app.UseSession();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
