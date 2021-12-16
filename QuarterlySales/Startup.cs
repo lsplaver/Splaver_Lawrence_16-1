@@ -83,6 +83,8 @@ namespace QuarterlySales
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}/{slug?}");
             });
+
+            SalesContext.CreateAdminUser(app.ApplicationServices).Wait();
         }
     }
 }

@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace QuarterlySales.Models
 {
-    public class User : IdentityUser
+    public class UserViewModel
     {
-        [NotMapped]
-        public IList<string> RoleNames { get; set; }
+        public IEnumerable<User> Users { get; set; }
+        public IEnumerable<IdentityRole> Roles { get; set; }
     }
 }
