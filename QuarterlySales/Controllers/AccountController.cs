@@ -26,12 +26,12 @@ namespace QuarterlySales.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                User user = new User { UserName = model.Username };
-                var result = await userManager.CreateAsync(user, model.Password);
+                User user = new User { UserName = vm.Username };
+                var result = await userManager.CreateAsync(user, vm.Password);
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
@@ -46,7 +46,7 @@ namespace QuarterlySales.Controllers
                 }
             }
 
-            return View(model);
+            return View(vm);
         }
 
         [HttpPost]
@@ -59,24 +59,24 @@ namespace QuarterlySales.Controllers
         [HttpGet]
         public IActionResult LogIn(string returnUrl = "")
         {
-            LoginViewModel model = new LoginViewModel { ReturnUrl = returnUrl };
-            return View(model);
+            LoginViewModel vm = new LoginViewModel { ReturnUrl = returnUrl };
+            return View(vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> LogIn(LoginViewModel model)
+        public async Task<IActionResult> LogIn(LoginViewModel vm)
         {
             if (ModelState.IsValid)
             {
                 var result = await signInManager.PasswordSignInAsync(
-                    model.Username, model.Password, isPersistent: model.RememberMe,
+                    vm.Username, vm.Password, isPersistent: vm.RememberMe,
                     lockoutOnFailure: true);
 
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    if (!string.IsNullOrEmpty(vm.ReturnUrl) && Url.IsLocalUrl(vm.ReturnUrl))
                     {
-                        return Redirect(model.ReturnUrl);
+                        return Redirect(vm.ReturnUrl);
                     }
                     else
                     {
@@ -87,7 +87,7 @@ namespace QuarterlySales.Controllers
 
             ModelState.AddModelError("", "Invalid username/password.");
 
-            return View(model);
+            return View(vm);
         }
     }
 }
