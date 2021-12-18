@@ -36,8 +36,8 @@ namespace QuarterlySales.Controllers
                     OrderBy = e => e.LastName
                 }),
                 CurrentRoute = builder.CurrentRoute,
-                TotalPages = builder.GetTotalPages(data.Sales.Count),
-                SalesListQuarter = new int[4] { 1, 2, 3, 4 }
+                TotalPages = builder.GetTotalPages(data.Sales.Count)//,
+                //SalesListQuarter = new int[4] { 1, 2, 3, 4 }
             };
 
             return View(vm);
