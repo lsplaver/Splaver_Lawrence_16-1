@@ -28,8 +28,7 @@ namespace QuarterlySales.Controllers
         public IActionResult Add(Sales sales)
         {
             string message = Validate.CheckSales(data, sales);
-            string message2 = CheckSalesQuarter(sales);
-            string message3 = CheckSalesYear(sales);
+            string message2 = CheckSalesYearAndQuarter(sales);
             if (!string.IsNullOrEmpty(message))
             {
                 ModelState.AddModelError(nameof(sales.EmployeeId), message);
@@ -38,11 +37,6 @@ namespace QuarterlySales.Controllers
             if (!string.IsNullOrEmpty(message2))
             {
                 ModelState.AddModelError(nameof(sales.Quarter), message2);
-            }
-
-            if (!string.IsNullOrEmpty(message3))
-            {
-                ModelState.AddModelError(nameof(sales.Year), message3);
             }
 
             if (ModelState.IsValid)
@@ -59,13 +53,14 @@ namespace QuarterlySales.Controllers
             }
         }
 
-        private string CheckSalesQuarter(Sales sale)
+        private string CheckSalesYearAndQuarter(Sales sale)
         {
-            int hireQuarter = 0, hireMonth = 0;
+            int hireQuarter = 0;
             Employee employee = data.Employees.Get(sale.EmployeeId);
 
-            hireMonth = employee.DateOfHire.Value.Month;
-            switch(hireMonth)
+            int hireYear = employee.DateOfHire.Value.Year;
+            int hireMonth = employee.DateOfHire.Value.Month;
+            switch (hireMonth)
             {
                 case 1:
                 case 2:
@@ -90,26 +85,9 @@ namespace QuarterlySales.Controllers
                 default:
                     break;
             }
-            if (sale.Quarter < hireQuarter)
+            if (sale.Year < hireYear && sale.Quarter < hireQuarter)
             {
-                return $"Sale quarter must be Q{hireQuarter} or later.";
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
-
-        private string CheckSalesYear(Sales sale)
-        {
-            int hireYear = 0;
-            Employee employee = data.Employees.Get(sale.EmployeeId);
-
-            hireYear = employee.DateOfHire.Value.Year;
-
-            if (sale.Year < hireYear)
-            {
-                return $"Sale year must be {employee.DateOfHire.Value.Year} or later.";
+                return $"Sale quarter must be {hireYear} Q{hireQuarter} or later";
             }
             else
             {

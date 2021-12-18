@@ -22,7 +22,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        <li class="nav-item col">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Index" asp-route-id="">Home</a>
                         </li>
 
@@ -31,26 +31,26 @@
                         @if (signInManager.IsSignedIn(User))
                         {
                             // signed-in user - logout button, username and welcome message
-                            <li class="nav-item">
+                            <li class="nav-item col">
                                 <a class="nav-link text-dark" asp-controller="Sales" asp-action="Add">Add Sales</a>
                             </li>
                             @if (User.IsInRole("Admin"))
                             {
-                                <li class="nav-item">
+                                <li class="nav-item col">
                                     <a class="nav-link text-dark" asp-controller="Employee" asp-action="Add">Add Employee</a>
                                     
                                 </li>
                             }
-                            <li class="nav-item">
+                            <li class="nav-item col">
                                 <span class="text-dark">Welcome, @User.Identity.Name</span>
                             </li>
                             @if (User.IsInRole("Admin"))
                             {
-                                <li class="nav-item">
+                                <li class="nav-item col">
                                     <a asp-action="Index" asp-controller="User" class="nav-link text-dark">Manage Users</a>
                                 </li>
                             }
-                            <li class="nav-item">
+                            <li class="nav-item col">
                                 <form method="post" asp-action="Logout" asp-controller="Account" asp-area="">
                                 <input type="submit" value="Log Out" />
                             </form>
@@ -62,10 +62,10 @@
                             var action = ViewContext.RouteData.Values["action"]?.ToString();
 
                             // anonymous user - register link and login button
-                            <li class="nav-item @Nav.Active("Register", action)">
+                            <li class="nav-item col @Nav.Active("Register", action)">
                                 <a asp-action="Register" asp-controller="Account" class="nav-link text-dark">Register</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item col">
                                 <a asp-action="Login" asp-controller="Account" class="nav-link text-dark">Log In</a>
                             </li>
                         }
@@ -76,10 +76,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @if(TempData.Keys.Contains("message"))
-            {
-                <h2 class="bg-light text-center p-2 mb-2">@TempData["message"]</h2>
-            }
+            <temp-message />
             @RenderBody()
         </main>
     </div>
