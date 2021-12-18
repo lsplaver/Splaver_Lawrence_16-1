@@ -70,45 +70,6 @@ namespace QuarterlySales.Controllers
             {
                 return string.Empty;
             }
-            //int hireYear = employee.DateOfHire.Value.Year;
-            //int hireMonth = employee.DateOfHire.Value.Month;
-            //switch (hireMonth)
-            //{
-            //    case 1:
-            //    case 2:
-            //    case 3:
-            //        hireQuarter = 1;
-            //        break;
-            //    case 4:
-            //    case 5:
-            //    case 6:
-            //        hireQuarter = 2;
-            //        break;
-            //    case 7:
-            //    case 8:
-            //    case 9:
-            //        hireQuarter = 3;
-            //        break;
-            //    case 10:
-            //    case 11:
-            //    case 12:
-            //        hireQuarter = 4;
-            //        break;
-            //    default:
-            //        break;
-            //}
-            //if (sale.Year < hireYear && sale.Quarter < hireQuarter)
-            //{
-            //    return $"Sale quarter must be {hireYear} Q{hireQuarter} or later";
-            //}
-            //else if (sale.Year >= hireYear && sale.Quarter < hireQuarter)
-            //{
-            //    return $"Sale quarter must be {hireYear} Q{hireQuarter} or later.";
-            //}
-            //else
-            //{
-            //    return string.Empty;
-            //}
         }
     }
 }
