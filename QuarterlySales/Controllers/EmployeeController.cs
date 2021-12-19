@@ -13,7 +13,7 @@ namespace QuarterlySales.Controllers
     public class EmployeeController : Controller
     {
         private IRepository<Employee> data { get; set; }
-        public EmployeeController(IRepository<Employee> rep) => data = rep; //SalesContext ctx) => data = new Repository<Employee>(ctx);
+        public EmployeeController(IRepository<Employee> rep) => data = rep;
 
         public IActionResult Index() => RedirectToAction("Index", "Home");
 

@@ -10,10 +10,6 @@ namespace QuarterlySales.Controllers
 {
     public class ValidationController : Controller
     {
-        //private QuarterlySalesUnitOfWork data { get; set; }
-
-        //public ValidationController(SalesContext ctx) => data = new QuarterlySalesUnitOfWork(ctx);
-
         public JsonResult CheckEmployee(string firstName, string lastName, DateTime dateOfBirth, [FromServices] IRepository<Employee> data)
         {
             Employee employee = new Employee
@@ -23,7 +19,7 @@ namespace QuarterlySales.Controllers
                 DateOfBirth = dateOfBirth
             };
 
-            string message = Validate.CheckEmployee(data/*.Employees*/, employee);
+            string message = Validate.CheckEmployee(data, employee);
             if (string.IsNullOrEmpty(message))
             {
                 return Json(true);
@@ -42,7 +38,7 @@ namespace QuarterlySales.Controllers
                 ManagerId = managerId
             };
 
-            string message = Validate.CheckManagerEmployeeMatch(data/*.Employees*/, employee);
+            string message = Validate.CheckManagerEmployeeMatch(data, employee);
             if (string.IsNullOrEmpty(message))
             {
                 return Json(true);
