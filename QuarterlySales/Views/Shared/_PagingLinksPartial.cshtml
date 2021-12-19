@@ -1,0 +1,16 @@
+﻿@{
+    //RouteDictionary routes = Model.CurrentRoute.Clone();
+    for (int x = 1; x <= Model.TotalPages; x++)
+    {
+        //routes.PageNumber = x;
+        //if (x == Model.CurrentRoute.PageNumber)
+        //{
+        @*<a asp-action="Index" asp-all-route-data="@routes" class="btn btn-primary @Nav.Active(x, Model.CurrentRoute.PageNumber) disabled">@x</a>*@
+        //}
+        //else
+        //{
+        @*<a asp-action="Index" asp-all-route-data="@routes" class="btn btn-primary @Nav.Active(x, Model.CurrentRoute.PageNumber)">@x</a>*@
+        //}
+        <paging-link number="@x" current="@Model.CurrentRoute"></paging-link>
+    }
+}

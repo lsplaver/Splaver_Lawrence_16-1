@@ -3,8 +3,8 @@
 @{ 
     ViewBag.Title = "Quarterly Sales";
 
-    RouteDictionary current = Model.CurrentRoute;
-    RouteDictionary routes = Model.CurrentRoute.Clone();
+    // RouteDictionary current = Model.CurrentRoute;
+    // RouteDictionary routes = Model.CurrentRoute.Clone();
 }
 
 <h4 class="mt-2 mb-2">@ViewBag.Title</h4>
@@ -67,7 +67,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(Sales sales in Model.Sales)
+        @foreach (Sales sales in Model.Sales)
         {
             <tr>
                 <td>@sales.Year</td>
@@ -86,10 +86,20 @@
 </table>
 
 @{ 
-    routes = Model.CurrentRoute.Clone();
-    for (int x = 1; x <= Model.TotalPages; x++)
-    {
-        routes.PageNumber = x;
-        <a asp-action="Index" asp-all-route-data="@routes" class="btn btn-primary @Nav.Active(x, current.PageNumber)">@x</a>
-    }
+    //RouteDictionary routes = Model.CurrentRoute.Clone();
+    //for (int x = 1; x <= Model.TotalPages; x++)
+    //{
+        //routes.PageNumber = x;
+        //if (x == Model.CurrentRoute.PageNumber)
+        //{
+            @*<a asp-action="Index" asp-all-route-data="@routes" class="btn btn-primary @Nav.Active(x, Model.CurrentRoute.PageNumber) disabled">@x</a>*@
+        //}
+        //else
+        //{
+            @*<a asp-action="Index" asp-all-route-data="@routes" class="btn btn-primary @Nav.Active(x, Model.CurrentRoute.PageNumber)">@x</a>*@
+        //}
+        @*<paging-link number="@x" current="@Model.CurrentRoute"></paging-link>*@
+    //}
 }
+
+<partial name="_PagingLinksPartial" />
