@@ -45,20 +45,24 @@
     <thead>
         <tr>
             <th>
-                @{ routes.SetSortAndDirection(nameof(Sales.Year), current); }
-                    <a asp-action="Index" asp-all-route-data="@routes">Year</a>
+                <sorting-link sort-field="@nameof(Sales.Year)" current="@Model.CurrentRoute">Year</sorting-link>
+                @*@{ routes.SetSortAndDirection(nameof(Sales.Year), current); }
+                    <a asp-action="Index" asp-all-route-data="@routes">Year</a>*@
             </th>
             <th>
-                @{ routes.SetSortAndDirection(nameof(Sales.Quarter), current); }
-                    <a asp-action="Index" asp-all-route-data="@routes">Quarter</a>
+                <sorting-link sort-field="@nameof(Sales.Quarter)" current="@Model.CurrentRoute">Quarter</sorting-link>
+                @*@{ routes.SetSortAndDirection(nameof(Sales.Quarter), current); }
+                    <a asp-action="Index" asp-all-route-data="@routes">Quarter</a>*@
             </th>
             <th>
-                @{ routes.SetSortAndDirection(nameof(Sales.Employee.FullName), current); }
-                    <a asp-action="Index" asp-all-route-data="@routes">Employee</a>
+                <sorting-link sort-field="@nameof(Sales.Employee.FullName)" current="@Model.CurrentRoute">Quarter</sorting-link>
+                @*@{ routes.SetSortAndDirection(nameof(Sales.Employee.FullName), current); }
+                    <a asp-action="Index" asp-all-route-data="@routes">Employee</a>*@
             </th>
             <th>
-                @{ routes.SetSortAndDirection(nameof(Sales.Amount), current); }
-                    <a asp-action="Index" asp-all-route-data="@routes">Amount</a>
+                <sorting-link sort-field="@nameof(Sales.Amount)" current="@Model.CurrentRoute">Quarter</sorting-link>
+                @*@{ routes.SetSortAndDirection(nameof(Sales.Amount), current); }
+                    <a asp-action="Index" asp-all-route-data="@routes">Amount</a>*@
             </th>
         </tr>
     </thead>

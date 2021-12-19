@@ -85,9 +85,14 @@ namespace QuarterlySales.Controllers
                 default:
                     break;
             }
-            if (sale.Year < hireYear && sale.Quarter < hireQuarter)
+
+            if(sale.Year < hireYear)
             {
-                return $"Sale quarter must be {hireYear} Q{hireQuarter} or later";
+                return $"Sale year and quarter must be the hire date of {hireYear} Q{hireQuarter} or later.";
+            }
+            else if (sale.Year == hireYear && sale.Quarter < hireQuarter)
+            {
+                return $"Sale year and quarter must be the hire date of {hireYear} Q{hireQuarter} or later.";
             }
             else
             {
