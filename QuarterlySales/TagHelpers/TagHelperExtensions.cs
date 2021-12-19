@@ -23,5 +23,11 @@ namespace QuarterlySales.TagHelpers
             output.TagMode = TagMode.StartTagAndEndTag;
             output.Attributes.AppendCssClass(classNames);
         }
+
+        public static void BuildLink(this TagHelperOutput output, string url, string classNames)
+        {
+            output.BuildTag("a", classNames);
+            output.Attributes.SetAttribute("href", url);
+        }
     }
 }
