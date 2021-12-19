@@ -12,24 +12,30 @@
 <form asp-action="Filter" method="post" class="form-inline">
     <label class="col-sm-2 col-form-label">Employee</label>
     
-    <select name="filter" class="form-control m-2"
+    @*<select name="filter" class="form-control m-2"
         asp-items="@(new SelectList(Model.Employees, "EmployeeId", "FullName", current.EmployeeFilter))">
         <option value="@SalesGridDTO.DefaultFilter">All</option>
-    </select>
+    </select>*@
+
+    <vc:employee-drop-down selected-value="@Model.CurrentRoute.EmployeeFilter"></vc:employee-drop-down>
 
     <label class="col-sm-2 col-form-label">Quarter</label>
 
-    <select name="filter" class="form-control m-2"
+    @*<select name="filter" class="form-control m-2"
         asp-items="@(new SelectList(Model.SalesListQuarter, "", "", current.QuarterFilter))">
         <option value="@SalesGridDTO.DefaultFilter">All</option>
-    </select>
+    </select>*@
+
+    <vc:quarter-drop-down selected-value="@Model.CurrentRoute.QuarterFilter"></vc:quarter-drop-down>
 
     <label class="col-sm-2 col-form-label">Year</label>
 
-    <select name="filter" class="form-control m-2"
+    @*<select name="filter" class="form-control m-2"
         asp-items="@(new SelectList(Model.SalesListYear, "", "", current.YearFilter))">
         <option value="@SalesGridDTO.DefaultFilter">All</option>
-    </select>
+    </select>*@
+
+    <vc:year-drop-down selected-value="@Model.CurrentRoute.YearFilter"></vc:year-drop-down>
 
     <button type="submit" class="btn btn-primary mr-2">Filter</button>
     <button type="submit" class="btn btn-primary" name="clear" value="true">Clear</button>

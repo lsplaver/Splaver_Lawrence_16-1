@@ -10,11 +10,11 @@ namespace QuarterlySales.Controllers
 {
     public class ValidationController : Controller
     {
-        private QuarterlySalesUnitOfWork data { get; set; }
+        //private QuarterlySalesUnitOfWork data { get; set; }
 
-        public ValidationController(SalesContext ctx) => data = new QuarterlySalesUnitOfWork(ctx);
+        //public ValidationController(SalesContext ctx) => data = new QuarterlySalesUnitOfWork(ctx);
 
-        public JsonResult CheckEmployee(string firstName, string lastName, DateTime dateOfBirth)
+        public JsonResult CheckEmployee(string firstName, string lastName, DateTime dateOfBirth, [FromServices] IRepository<Employee> data)
         {
             Employee employee = new Employee
             {
@@ -23,7 +23,7 @@ namespace QuarterlySales.Controllers
                 DateOfBirth = dateOfBirth
             };
 
-            string message = Validate.CheckEmployee(data.Employees, employee);
+            string message = Validate.CheckEmployee(data/*.Employees*/, employee);
             if (string.IsNullOrEmpty(message))
             {
                 return Json(true);
@@ -32,7 +32,7 @@ namespace QuarterlySales.Controllers
             return Json(message);
         }
 
-        public JsonResult CheckManager(int managerId, string firstName, string lastName, DateTime dateOfBirth)
+        public JsonResult CheckManager(int managerId, string firstName, string lastName, DateTime dateOfBirth, [FromServices] IRepository<Employee> data)
         {
             Employee employee = new Employee
             {
@@ -42,7 +42,7 @@ namespace QuarterlySales.Controllers
                 ManagerId = managerId
             };
 
-            string message = Validate.CheckManagerEmployeeMatch(data.Employees, employee);
+            string message = Validate.CheckManagerEmployeeMatch(data/*.Employees*/, employee);
             if (string.IsNullOrEmpty(message))
             {
                 return Json(true);
@@ -51,7 +51,7 @@ namespace QuarterlySales.Controllers
             return Json(message);
         }
 
-        public JsonResult CheckSales(int employeeId, int year, int quarter)
+        public JsonResult CheckSales(int employeeId, int year, int quarter, [FromServices] IQuarterlySalesUnitOfWork data)
         {
             Sales sales = new Sales
             {

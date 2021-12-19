@@ -13,25 +13,25 @@ namespace QuarterlySales.Models
 
         public IEnumerable<Employee> Employees { get; set; }
 
-        public IEnumerable<int> SalesListYear
-        {
-            get
-            {
-                List<int> years = new List<int>();
+        //public IEnumerable<int> SalesListYear
+        //{
+        //    get
+        //    {
+        //        List<int> years = new List<int>();
 
-                int foundingYear = 1995;
+        //        int foundingYear = 1995;
 
-                int maxYear = DateTime.Now.Year;
+        //        int maxYear = DateTime.Now.Year;
 
-                for (int year = maxYear; year >= foundingYear; year--)
-                {
-                    years.Add(year);
-                }
+        //        for (int year = maxYear; year >= foundingYear; year--)
+        //        {
+        //            years.Add(year);
+        //        }
 
-                return years;
-            }
-        }
+        //        return years;
+        //    }
+        //}
 
-        public int[] SalesListQuarter { get; set; }
+        //public int[] SalesListQuarter { get; set; }
     }
 }

@@ -33,6 +33,11 @@ namespace QuarterlySales
 
             services.AddControllersWithViews().AddNewtonsoftJson();
 
+            services.AddHttpContextAccessor();
+            services.AddTransient<IQuarterlySalesUnitOfWork, QuarterlySalesUnitOfWork>();
+
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+
             services.AddDbContext<SalesContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SalesContext")));
 

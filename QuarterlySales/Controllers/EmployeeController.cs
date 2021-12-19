@@ -12,8 +12,8 @@ namespace QuarterlySales.Controllers
     [Authorize(Roles = "Admin")]
     public class EmployeeController : Controller
     {
-        private Repository<Employee> data { get; set; }
-        public EmployeeController(SalesContext ctx) => data = new Repository<Employee>(ctx);
+        private IRepository<Employee> data { get; set; }
+        public EmployeeController(IRepository<Employee> rep) => data = rep; //SalesContext ctx) => data = new Repository<Employee>(ctx);
 
         public IActionResult Index() => RedirectToAction("Index", "Home");
 
@@ -27,14 +27,14 @@ namespace QuarterlySales.Controllers
         [HttpPost]
         public IActionResult Add(Employee employee)
         {
-            string message = Validate.CheckEmployee(data, employee);
+            string message = Validate.CheckEmployee((Repository<Employee>)data, employee);
             string message2 = CheckManagerHireDate(employee);
             if (!string.IsNullOrEmpty(message))
             {
                 ModelState.AddModelError(nameof(Employee.DateOfBirth), message);
             }
 
-            message = Validate.CheckManagerEmployeeMatch(data, employee);
+            message = Validate.CheckManagerEmployeeMatch((Repository<Employee>)data, employee);
             if (!string.IsNullOrEmpty(message))
             {
                 ModelState.AddModelError(nameof(Employee.ManagerId), message);

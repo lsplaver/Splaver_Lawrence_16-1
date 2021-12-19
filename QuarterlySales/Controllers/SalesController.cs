@@ -12,8 +12,8 @@ namespace QuarterlySales.Controllers
     [Authorize]
     public class SalesController : Controller
     {
-        private QuarterlySalesUnitOfWork data { get; set; }
-        public SalesController(SalesContext ctx) => data = new QuarterlySalesUnitOfWork(ctx);
+        private IQuarterlySalesUnitOfWork data { get; set; }
+        public SalesController(IQuarterlySalesUnitOfWork unit) => data = unit; //SalesContext ctx) => data = new QuarterlySalesUnitOfWork(ctx);
 
         public IActionResult Index() => RedirectToAction("Index", "Home");
 

@@ -10,8 +10,8 @@ namespace QuarterlySales.Models
         private SalesContext context { get; set; }
         public QuarterlySalesUnitOfWork(SalesContext ctx) => context = ctx;
 
-        private Repository<Employee> empployeeData;
-        public Repository<Employee> Employees
+        private IRepository<Employee> empployeeData;
+        public IRepository<Employee> Employees
         {
             get
             {
@@ -23,8 +23,8 @@ namespace QuarterlySales.Models
             }
         }
 
-        private Repository<Sales> salesData;
-        public Repository<Sales> Sales
+        private IRepository<Sales> salesData;
+        public IRepository<Sales> Sales
         {
             get
             {

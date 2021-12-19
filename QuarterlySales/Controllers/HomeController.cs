@@ -10,8 +10,8 @@ namespace QuarterlySales.Controllers
 {
     public class HomeController : Controller
     {
-        private QuarterlySalesUnitOfWork data { get; set; }
-        public HomeController(SalesContext ctx) => data = new QuarterlySalesUnitOfWork(ctx);
+        private IQuarterlySalesUnitOfWork data { get; set; }
+        public HomeController(IQuarterlySalesUnitOfWork unit) => data = unit; //SalesContext ctx) => data = new QuarterlySalesUnitOfWork(ctx);
 
         [HttpGet]
         public ViewResult Index(SalesGridDTO values)
@@ -36,8 +36,8 @@ namespace QuarterlySales.Controllers
                     OrderBy = e => e.LastName
                 }),
                 CurrentRoute = builder.CurrentRoute,
-                TotalPages = builder.GetTotalPages(data.Sales.Count),
-                SalesListQuarter = new int[4] { 1, 2, 3, 4 }
+                TotalPages = builder.GetTotalPages(data.Sales.Count)//,
+                //SalesListQuarter = new int[4] { 1, 2, 3, 4 }
             };
 
             return View(vm);
