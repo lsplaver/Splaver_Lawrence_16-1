@@ -26,7 +26,8 @@
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Index" asp-route-id="">Home</a>
                         </li>
 
-                        @using Microsoft.AspNetCore.Identity
+                        <partial name="_NavBar" />
+                        @*@using Microsoft.AspNetCore.Identity
                         @inject SignInManager<User> signInManager
                         @if (signInManager.IsSignedIn(User))
                         {
@@ -68,7 +69,7 @@
                             <li class="nav-item col">
                                 <a asp-action="Login" asp-controller="Account" class="nav-link text-dark">Log In</a>
                             </li>
-                        }
+                        }*@
                     </ul>
                 </div>
             </div>
