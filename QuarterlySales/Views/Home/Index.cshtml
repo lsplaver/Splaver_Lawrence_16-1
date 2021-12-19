@@ -2,39 +2,18 @@
 
 @{ 
     ViewBag.Title = "Quarterly Sales";
-
-    RouteDictionary current = Model.CurrentRoute;
-    RouteDictionary routes = Model.CurrentRoute.Clone();
 }
 
 <h4 class="mt-2 mb-2">@ViewBag.Title</h4>
 
 <form asp-action="Filter" method="post" class="form-inline">
     <label class="col-sm-2 col-form-label">Employee</label>
-    
-    @*<select name="filter" class="form-control m-2"
-        asp-items="@(new SelectList(Model.Employees, "EmployeeId", "FullName", current.EmployeeFilter))">
-        <option value="@SalesGridDTO.DefaultFilter">All</option>
-    </select>*@
-
     <vc:employee-drop-down selected-value="@Model.CurrentRoute.EmployeeFilter"></vc:employee-drop-down>
 
     <label class="col-sm-2 col-form-label">Quarter</label>
-
-    @*<select name="filter" class="form-control m-2"
-        asp-items="@(new SelectList(Model.SalesListQuarter, "", "", current.QuarterFilter))">
-        <option value="@SalesGridDTO.DefaultFilter">All</option>
-    </select>*@
-
     <vc:quarter-drop-down selected-value="@Model.CurrentRoute.QuarterFilter"></vc:quarter-drop-down>
 
     <label class="col-sm-2 col-form-label">Year</label>
-
-    @*<select name="filter" class="form-control m-2"
-        asp-items="@(new SelectList(Model.SalesListYear, "", "", current.YearFilter))">
-        <option value="@SalesGridDTO.DefaultFilter">All</option>
-    </select>*@
-
     <vc:year-drop-down selected-value="@Model.CurrentRoute.YearFilter"></vc:year-drop-down>
 
     <button type="submit" class="btn btn-primary mr-2">Filter</button>
@@ -46,28 +25,20 @@
         <tr>
             <th>
                 <sorting-link sort-field="@nameof(Sales.Year)" current="@Model.CurrentRoute">Year</sorting-link>
-                @*@{ routes.SetSortAndDirection(nameof(Sales.Year), current); }
-                    <a asp-action="Index" asp-all-route-data="@routes">Year</a>*@
             </th>
             <th>
                 <sorting-link sort-field="@nameof(Sales.Quarter)" current="@Model.CurrentRoute">Quarter</sorting-link>
-                @*@{ routes.SetSortAndDirection(nameof(Sales.Quarter), current); }
-                    <a asp-action="Index" asp-all-route-data="@routes">Quarter</a>*@
             </th>
             <th>
                 <sorting-link sort-field="@nameof(Sales.Employee.FullName)" current="@Model.CurrentRoute">Quarter</sorting-link>
-                @*@{ routes.SetSortAndDirection(nameof(Sales.Employee.FullName), current); }
-                    <a asp-action="Index" asp-all-route-data="@routes">Employee</a>*@
             </th>
             <th>
                 <sorting-link sort-field="@nameof(Sales.Amount)" current="@Model.CurrentRoute">Quarter</sorting-link>
-                @*@{ routes.SetSortAndDirection(nameof(Sales.Amount), current); }
-                    <a asp-action="Index" asp-all-route-data="@routes">Amount</a>*@
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach(Sales sales in Model.Sales)
+        @foreach (Sales sales in Model.Sales)
         {
             <tr>
                 <td>@sales.Year</td>
@@ -85,11 +56,4 @@
     </tfoot>
 </table>
 
-@{ 
-    routes = Model.CurrentRoute.Clone();
-    for (int x = 1; x <= Model.TotalPages; x++)
-    {
-        routes.PageNumber = x;
-        <a asp-action="Index" asp-all-route-data="@routes" class="btn btn-primary @Nav.Active(x, current.PageNumber)">@x</a>
-    }
-}
+<partial name="_PagingLinksPartial" />

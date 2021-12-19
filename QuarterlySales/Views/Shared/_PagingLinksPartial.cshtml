@@ -1,0 +1,6 @@
+﻿@{
+    for (int x = 1; x <= Model.TotalPages; x++)
+    {
+        <paging-link number="@x" current="@Model.CurrentRoute"></paging-link>
+    }
+}

@@ -89,5 +89,10 @@ namespace QuarterlySales.Controllers
 
             return View(vm);
         }
+
+        public ViewResult AccessDenied()
+        {
+            return View();
+        }
     }
 }
