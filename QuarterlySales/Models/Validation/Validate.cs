@@ -7,7 +7,7 @@ namespace QuarterlySales.Models.Validation
 {
     public static class Validate
     {
-        public static string CheckEmployee(Repository<Employee> data, Employee employee)
+        public static string CheckEmployee(IRepository<Employee> data, Employee employee)
         {
             var options = new QueryOptions<Employee>
             {
@@ -23,7 +23,7 @@ namespace QuarterlySales.Models.Validation
                 : $"{searchEmployee.FullName} (DOB: {searchEmployee.DateOfBirth?.ToShortDateString()}) is already in the database.";
         }
 
-        public static string CheckManagerEmployeeMatch(Repository<Employee> data, Employee employee)
+        public static string CheckManagerEmployeeMatch(IRepository<Employee> data, Employee employee)
         {
             Employee manager = data.Get(employee.ManagerId);
 

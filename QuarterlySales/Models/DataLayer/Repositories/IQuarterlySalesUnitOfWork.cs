@@ -7,9 +7,9 @@ namespace QuarterlySales.Models
 {
     public interface IQuarterlySalesUnitOfWork
     {
-        Repository<Employee> Employees { get; }
+        IRepository<Employee> Employees { get; }
 
-        Repository<Sales> Sales { get; }
+        IRepository<Sales> Sales { get; }
 
         void Save();
     }

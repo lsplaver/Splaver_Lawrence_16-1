@@ -10,8 +10,8 @@ namespace QuarterlySales.Controllers
 {
     public class HomeController : Controller
     {
-        private QuarterlySalesUnitOfWork data { get; set; }
-        public HomeController(SalesContext ctx) => data = new QuarterlySalesUnitOfWork(ctx);
+        private IQuarterlySalesUnitOfWork data { get; set; }
+        public HomeController(IQuarterlySalesUnitOfWork unit) => data = unit; //SalesContext ctx) => data = new QuarterlySalesUnitOfWork(ctx);
 
         [HttpGet]
         public ViewResult Index(SalesGridDTO values)
